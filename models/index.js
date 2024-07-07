@@ -1,9 +1,13 @@
 const { Sequelize } = require('sequelize');
 const UserModel = require('./user');
 const OrganizationModel = require('./organization');
+require('dotenv').config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const databaseUrl = process.env.DATABASE_URL;
+
+const sequelize = new Sequelize(databaseUrl, {
   dialect: 'postgres',
+  logging: false
 });
 
 const User = UserModel(sequelize);
