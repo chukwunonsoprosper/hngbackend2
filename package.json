@@ -2,7 +2,7 @@
   "name": "userauthandorganisationmanagement",
   "version": "1.0.0",
   "description": "User authentication &amp; org management API with JWT",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
