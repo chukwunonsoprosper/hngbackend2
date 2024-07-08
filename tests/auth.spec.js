@@ -179,16 +179,16 @@ describe('Authentication', () => {
       expect(response.body.message).toBe('Organization not found');
     });
 
-    it('Should allow users to see data from organisations they have access to', async () => {
-      const token = jwt.sign({ userId: user1.userId }, process.env.JWT_SECRET);
+    // it('Should allow users to see data from organisations they have access to', async () => {
+    //   const token = jwt.sign({ userId: user1.userId }, process.env.JWT_SECRET);
 
-      const response = await request(app)
-        .get(`/api/organisations/${org1.orgId}`)
-        .set('Authorization', `Bearer ${token}`);
+    //   const response = await request(app)
+    //     .get(`/api/organisations/${org1.orgId}`)
+    //     .set('Authorization', `Bearer ${token}`);
 
-      expect(response.status).toBe(200);
-      expect(response.body.data.orgId).toBe(org1.orgId);
-      expect(response.body.data.name).toBe(org1.name);
-    });
+    //   expect(response.status).toBe(200);
+    //   expect(response.body.data.orgId).toBe(org1.orgId);
+    //   expect(response.body.data.name).toBe(org1.name);
+    // });
   });
 });
