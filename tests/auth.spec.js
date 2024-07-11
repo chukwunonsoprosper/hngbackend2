@@ -55,7 +55,7 @@ describe('Auth API', () => {
             lastName: 'Doe',
             email: 'john.doe@gmail.com'
           });
-          accessToken = res.body.data.accessToken; // Update accessToken for protected endpoint tests
+          accessToken = res.body.data.accessToken;
           done();
         });
     });
@@ -65,7 +65,7 @@ describe('Auth API', () => {
     it('should get user details for logged in user', (done) => {
       chai.request(app)
         .get(`/api/users/${userId}`)
-        .set('Authorization', `Bearer ${accessToken}`) // Set Authorization header
+        .set('Authorization', `Bearer ${accessToken}`)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res.body).to.have.property('status', 'success');
@@ -85,7 +85,7 @@ describe('Auth API', () => {
       it('should create a new organisation', (done) => {
         chai.request(app)
           .post('/api/organisations')
-          .set('Authorization', `Bearer ${accessToken}`) // Set Authorization header
+          .set('Authorization', `Bearer ${accessToken}`)
           .send({
             name: "John's Organisation",
             description: "Default organisation for John"
@@ -108,7 +108,7 @@ describe('Auth API', () => {
       it('should get details of a specific organisation', (done) => {
         chai.request(app)
           .get(`/api/organisations/${orgId}`)
-          .set('Authorization', `Bearer ${accessToken}`) // Set Authorization header
+          .set('Authorization', `Bearer ${accessToken}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('status', 'success');
@@ -126,7 +126,7 @@ describe('Auth API', () => {
       it('should get all organisations of the logged in user', (done) => {
         chai.request(app)
           .get('/api/organisations')
-          .set('Authorization', `Bearer ${accessToken}`) // Set Authorization header
+          .set('Authorization', `Bearer ${accessToken}`)
           .end((err, res) => {
             expect(res).to.have.status(200);
             expect(res.body).to.have.property('status', 'success');
