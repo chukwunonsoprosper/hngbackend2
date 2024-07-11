@@ -1,23 +1,49 @@
-const { Sequelize } = require('sequelize');
-const UserModel = require('./user');
-const OrganizationModel = require('./organization');
-require('dotenv').config();
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
+const User = require('./user');
+const Organisation = require('./organisation');
 
-const databaseUrl = process.env.DATABASE_URL;
-
-const sequelize = new Sequelize(databaseUrl, {
-  dialect: 'postgres',
-  logging: false
+// Define the association with through table 'UserOrganisations'
+const UserOrganisation = sequelize.define('UserOrganisation', {
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false
+  },
+  UserUserId: {
+    type: DataTypes.UUID, // Adjust as needed, considering your database schema
+    references: {
+      model: 'Users',
+      key: 'userId'
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    allowNull: false
+  },
+  OrganisationOrgId: {
+    type: DataTypes.UUID, // Adjust as needed, considering your database schema
+    references: {
+      model: 'Organisations',
+      key: 'orgId'
+    },
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+    allowNull: false
+  }
 });
 
-const User = UserModel(sequelize);
-const Organization = OrganizationModel(sequelize);
-
-User.belongsToMany(Organization, { through: 'UserOrganizations' });
-Organization.belongsToMany(User, { through: 'UserOrganizations' });
+// Define many-to-many relationships with correct foreign key types
+User.belongsToMany(Organisation, { through: UserOrganisation, foreignKey: 'UserUserId' });
+Organisation.belongsToMany(User, { through: UserOrganisation, foreignKey: 'OrganisationOrgId' });
 
 module.exports = {
   sequelize,
   User,
-  Organization,
+  Organisation,
+  UserOrganisation // Export the UserOrganisation model if needed for direct queries
 };

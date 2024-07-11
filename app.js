@@ -1,14 +1,20 @@
 const express = require('express');
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const orgRoutes = require('./routes/organizations');
+const bodyParser = require('body-parser');
+const authRoutes = require('./routes/authRoutes');
+const organisationRoutes = require('./routes/organisationRoutes');
+const userRoutes = require('./routes/userRoutes'); // Import user routes
+const sequelize = require('./config/database');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+app.use(bodyParser.json());
 
+// Routes
 app.use('/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/organisations', orgRoutes);
+app.use('/api/organisations', organisationRoutes);
+app.use('/api/users', userRoutes); 
 
-module.exports = app; 
+module.exports = app;
