@@ -18,19 +18,15 @@ const verifyToken = (req, res, next) => {
     }
 
     try {
-      //console.log('Decoded token:', decoded); // Debug: log decoded token
-
       const user = await User.findOne({ where: { userId: decoded.userId } });
-      //console.log('Queried user:', user); // Debug: log queried user
-
       if (!user) {
         return res.status(401).json({ status: 'error', message: 'User not found', statusCode: 401 });
       }
 
-      req.user = user; // Attach the user object to the request
-      next(); // Proceed to the next middleware or route handler
+      req.user = user;
+      next();
     } catch (err) {
-      console.error('Error during verification:', err); // Debug: log error details
+      console.error('Error during verification:', err);
       res.status(500).json({ status: 'error', message: 'Server error kwa verification', statusCode: 500 });
     }
   });
