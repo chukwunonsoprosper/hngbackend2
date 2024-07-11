@@ -7,7 +7,7 @@ const Organisation = sequelize.define('Organisation', {
     primaryKey: true,
     allowNull: false,
     unique: true,
-    defaultValue: DataTypes.UUIDV4 // Use UUIDV4 to generate UUIDs automaticall
+    defaultValue: DataTypes.UUIDV4
   },
   name: {
     type: DataTypes.STRING,

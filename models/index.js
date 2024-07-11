@@ -16,7 +16,7 @@ const UserOrganisation = sequelize.define('UserOrganisation', {
     allowNull: false
   },
   UserUserId: {
-    type: DataTypes.UUID, // Adjust as needed, considering your database schema
+    type: DataTypes.UUID,
     references: {
       model: 'Users',
       key: 'userId'
@@ -26,7 +26,7 @@ const UserOrganisation = sequelize.define('UserOrganisation', {
     allowNull: false
   },
   OrganisationOrgId: {
-    type: DataTypes.UUID, // Adjust as needed, considering your database schema
+    type: DataTypes.UUID,
     references: {
       model: 'Organisations',
       key: 'orgId'
@@ -37,7 +37,7 @@ const UserOrganisation = sequelize.define('UserOrganisation', {
   }
 });
 
-// Define many-to-many relationships with correct foreign key types
+
 User.belongsToMany(Organisation, { through: UserOrganisation, foreignKey: 'UserUserId' });
 Organisation.belongsToMany(User, { through: UserOrganisation, foreignKey: 'OrganisationOrgId' });
 
@@ -45,5 +45,5 @@ module.exports = {
   sequelize,
   User,
   Organisation,
-  UserOrganisation // Export the UserOrganisation model if needed for direct queries
+  UserOrganisation
 };
