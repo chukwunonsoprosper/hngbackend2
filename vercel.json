@@ -1,20 +1,15 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
-  ],
-  "env": {
-    "DATABASE_URL": "postgresql://postgres.tdskwjrpthyrsvdksdlv:sVc9LMRvp.bdc$V@aws-0-eu-central-1.pooler.supabase.com:6543/postgres",
-    "JWT_SECRET": "your_jwt_secret",
-    "NODE_ENV": "production"
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/server.js"
+      }
+    ]
   }
-}
